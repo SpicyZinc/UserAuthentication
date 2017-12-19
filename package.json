@@ -1,0 +1,22 @@
+{
+  "name": "user-authentication",
+  "version": "1.0.0",
+  "description": "this is a browser app for user authentication Salesforce interview question",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpicyZinc/UserAuthentication.git"
+  },
+  "keywords": [
+    "UserAuthentication"
+  ],
+  "author": "Liang Xin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SpicyZinc/UserAuthentication/issues"
+  },
+  "homepage": "https://github.com/SpicyZinc/UserAuthentication#readme"
+}
