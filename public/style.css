@@ -1,0 +1,54 @@
+.links {
+	position: relative;
+	top: 30%;
+	font-weight: 600;
+	font-size: 16px;
+}
+
+.links > a {
+	text-decoration: none;
+	color: rgba(0, 0, 0, 0.87);
+	padding-right: 20px;
+}
+
+.links > a:hover {
+	color: #B3572F
+}
+
+.container {
+	width: 60%;
+	margin: 0 auto;
+}
+
+.create-buttons > div:first-child {
+	padding-right: 10px;
+}
+
+.logout {
+	margin-top: 150px;
+	float: right;
+	position: relative;
+	top: 80px;
+}
+
+
+.logout > a {
+	text-decoration: none;
+	color: rgba(0, 0, 0, 0.87);
+	padding-right: 20px;
+}
+
+.logout > a:hover {
+	color: #B3623C
+}
+
+.user-info {
+	background: #D4D6DC;
+}
+
+.user-name {
+	color: #35A5FF;
+	font-weight: 600;
+	font-size: 16px;
+
+}
