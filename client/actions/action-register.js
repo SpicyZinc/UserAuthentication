@@ -23,8 +23,8 @@ const RequestFailure = (error) => ({
 });
 
 export default function register(user) {
-    return (dispatch) => {
-        dispatch(Request(user));
+	return (dispatch) => {
+		dispatch(Request(user));
 
 		let promise = axios({ 
 			url: '/signup',
@@ -43,5 +43,5 @@ export default function register(user) {
 		});
 
 		return promise;
-    };
+	};
 }

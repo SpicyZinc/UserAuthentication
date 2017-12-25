@@ -20,8 +20,6 @@ io.on('connection', (client) => {
 	});
 });
 
-
-
 var localStorage = require('node-persist');
 localStorage.init();
 
@@ -56,12 +54,20 @@ app.get('/user', function(req, res, next) {
 			if (err) {
 				return res.json(401, { success: false, message: 'Failed to authenticate token.' });    
 			} else {
+				console.log(decoded);
 				let users = localStorage.values();
 				let email = decoded.email;
 				let matchedUsers = users.filter((user) => (user.email === email));
 				let user = matchedUsers.length ? matchedUsers[0] : null;
-				user.token = token;
-				res.json(200, user);
+				if (user ===  null) {
+					res.json(404, { 
+						success: false, 
+						message: 'No user found.' 
+					});
+				} else {
+					user.token = token;
+					res.json(200, user);
+				}
 			}
 		});
 	} else { // if there is no token, return an error
@@ -92,10 +98,9 @@ app.post('/login', function(req, res, next) {
 
 app.post('/signup', (req, res, next) => {
 	var user = req.body;
-	console.log(req.url, user);
+	localStorage.forEach(function(key, item) {
+		console.log(key, item);
 
-	for (var key in localStorage) {
-		var item = localStorage.getItem(key);
 		if (item && item.email === user.email) {
 			res.json(409, {
 				success: false,
@@ -105,7 +110,8 @@ app.post('/signup', (req, res, next) => {
 				}
 			});
 		}
-	}
+	});
+
 
 	if (Object.keys(user).length) {
 		user.id = ++id;
@@ -117,6 +123,40 @@ app.post('/signup', (req, res, next) => {
 		console.log('No data found in request body; no user created.');
 		res.json(500, { error: 'No data found in request body.' });
 	}
+});
+
+
+app.post('/edit', (req, res, next) => {
+	var user = req.body;
+	let found = false;
+	localStorage.forEach(function(key, item) {
+		console.log(key, item);
+
+		if (item && item.email === user.email) {
+			found = true;
+			localStorage.setItem(key, user)	
+			console.log('Updated user' + JSON.stringify(user));
+			res.json(200, user);
+		}
+	});
+	!found && res.json(500, { error: 'No data found in request body.' });
+});
+
+
+app.post('/delete', (req, res, next) => {
+	var user = req.body;
+	let removed = false;
+	localStorage.forEach(function(key, item) {
+		console.log(key, item);
+
+		if (item && item.email === user.email) {
+			removed = true;
+			localStorage.removeItem(key);	
+			console.log('Removed user' + JSON.stringify(user));
+			res.json(200, {});
+		}
+	});
+	!removed && res.json(500, { error: 'No user found local storage.' });
 });
 
 

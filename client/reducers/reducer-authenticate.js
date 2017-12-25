@@ -4,7 +4,10 @@ import {
 	LOGIN_SUCCESS,
 	LOGIN_FAILURE,
 	LOGOUT,
-	FAKE_EVENT
+	FAKE_EVENT,
+	EDIT_SUCCESS,
+	EDIT_FAILURE,
+	DELETE_SUCCESS
 } from '../constants';
 
 const initialState = {
@@ -39,7 +42,27 @@ const authenticationReducer = (state = initialState, action) => {
 			return { ...state,
 				fakeEvent: action.message
 			};
-
+		case EDIT_SUCCESS:
+			return { ...state,
+				loggingIn: false,
+				loggedIn: true,
+				user: action.user,
+				editModal: false
+			};
+		case DELETE_SUCCESS:
+			return { ...state,
+				loggingIn: false,
+				loggedIn: false,
+				user: {},
+				editModal: false
+			};
+		case EDIT_FAILURE:
+			return { ...state,
+				loggingIn: false,
+				loggedIn: false,
+				user: {},
+				error: action.error
+			};
 		case LOGOUT:
 			return {};
 		default:

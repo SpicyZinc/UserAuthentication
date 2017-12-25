@@ -5,4 +5,7 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGOUT = 'LOGOUT';
+export const EDIT_SUCCESS = 'EDIT_SUCCESS';
+export const EDIT_FAILURE = 'EDIT_FAILURE';
+export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 export const FAKE_EVENT = 'FAKE_EVENT';
