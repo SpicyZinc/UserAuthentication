@@ -2,29 +2,11 @@
 
 var express = require('express'),
 	bodyParser = require('body-parser'),
-	assign = require('object-assign');
-
-const io = require('socket.io')();
-
-var i = 0;
-io.on('connection', (client) => {
-	client.emit('timer', new Date());
-});
-
-io.on('connection', (client) => {
-	client.on('subscribeToRegisterEvent', (interval) => {
-		console.log('client is subscribing to fake register events', interval);
-		setInterval(() => {
-			client.emit('registration', 'A new user number ' + (++i) + ' signed up');
-		}, interval);
-	});
-});
-
-var localStorage = require('node-persist');
-localStorage.init();
+	path = require('path');
 
 var jwt = require('jsonwebtoken');
-
+var localStorage = require('node-persist');
+localStorage.init();
 
 var data = {},
 	id = 0,
@@ -44,7 +26,12 @@ app.use(function(req, res, next) {
 });
 
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
+app.use(express.static('dist'));
+
+app.get('/', (req, res) => {
+	res.sendFile(path.resolve(__dirname, '../index.html'));
+});
 
 
 app.get('/user', function(req, res, next) {
@@ -160,9 +147,10 @@ app.post('/delete', (req, res, next) => {
 });
 
 
-app.listen(9898);
-console.log('Started listening on port 9898');
-
-const port = 8000;
-io.listen(port);
-console.log('socket listening on port ', port);
+app.listen(9898, (error) => {
+	if (error) {
+		console.log(error);
+	} else {
+		console.log('Started listening on port 9898');
+	}
+});

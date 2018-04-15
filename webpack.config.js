@@ -1,15 +1,19 @@
-var webpack = require('webpack')
-var path = require('path')
+var webpack = require('webpack');
+var path = require('path');
+
+var BUILD_DIR = path.resolve(__dirname, './dist/scripts-build');
+
 module.exports = {
-	entry: path.resolve(__dirname, './client/app'),
+	devtool: 'source-map',
+	entry: path.resolve(__dirname, './client/app.js'), // or call it index.js
 	output: {
-		path: __dirname + '/dist',
-		publicPath: '/',
-		filename: 'scripts-build/app.js'
+		filename: 'bundle.js',
+		path: BUILD_DIR,
+		publicPath: '/'
 	},
-	devServer: {
-		contentBase: path.resolve(__dirname, 'public')
-	},
+	// devServer: {
+	// 	contentBase: path.resolve(__dirname, '')
+	// },
 	module: {
 		loaders: [
 			{test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},

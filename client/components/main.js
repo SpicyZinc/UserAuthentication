@@ -8,9 +8,7 @@ import {
 	Snackbar
 } from 'material-ui';
 
-import { FAKE_EVENT } from '../constants';
 import getUser from '../actions/action-user';
-import subscribeToFakeEvent from '../events/event-register';
 import store from '../store';
 
 
@@ -41,13 +39,6 @@ const styles = {
 class Main extends React.Component {
 	constructor(props) {
 		super(props);
-
-		subscribeToFakeEvent((err, event) => {
-			store.dispatch({
-				type: FAKE_EVENT,
-				message: event
-			});
-		});
 	}
 
 	componentDidMount() {

@@ -1,0 +1,11 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+
+node_modules/
+.node-persist/
+dist/
+package-lock.json
+public/.DS_Store
